@@ -13,6 +13,7 @@ import java.util.Random;
 
 public class DicteeDeNote extends AppCompatActivity implements View.OnClickListener {
 
+    // Il faut ajouter les images et les sons des notes #
     Note Do = new Note(0, "Do", R.drawable.ic_note_do, R.raw.aaa);
     Note Dod = new Note(1, "Do#", R.drawable.ic_note_do, R.raw.aaa);
     Note Re = new Note(2, "Ré", R.drawable.ic_note_re, R.raw.re);

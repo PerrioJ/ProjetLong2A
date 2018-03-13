@@ -29,7 +29,6 @@
         <activity
             android:name=".TestRecord"
             android:screenOrientation="portrait" />
-        <activity android:name=".LectureDeNoteReconnaissance"></activity>
     </application>
 
 </manifest>

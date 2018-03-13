@@ -15,8 +15,7 @@ public class MenuActivity extends AppCompatActivity {
 
         Button buttonLecture = (Button) findViewById(R.id.buttonLecture);
         Button buttonDictee = (Button) findViewById(R.id.buttonDictee);
-        Button buttonLecture2 = (Button) findViewById(R.id.buttonLecture2);
-        Button buttonTest = (Button) findViewById(R.id.buttonTest);
+        Button buttonAccorder = (Button) findViewById(R.id.buttonAccordeur);
 
         buttonLecture.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -32,23 +31,14 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
-        buttonLecture2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent passageLecture2 = new Intent(MenuActivity.this, LectureDeNoteReconnaissance.class);
-                startActivity(passageLecture2);
-            }
-        });
 
-        buttonTest.setOnClickListener(new View.OnClickListener() {
+        buttonAccorder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent passageTest = new Intent(MenuActivity.this, TestRecord.class);
                 startActivity(passageTest);
             }
         });
-
-
 
     }
 }

@@ -69,7 +69,7 @@ public class LectureDeNote extends AppCompatActivity implements View.OnClickList
             ImageView imageViewNote = (ImageView) findViewById(R.id.imageViewNote);
             Random rand = new Random();
             int idRandomNew = rand.nextInt(7) + 1;
-            while (idRandomNew ==this.idRandom) {
+            while (idRandomNew == this.idRandom) {
                 idRandomNew = rand.nextInt(7) + 1;
             }
             this.idRandom = idRandomNew;

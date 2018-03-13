@@ -38,8 +38,9 @@ public class Note {
 
         long depart = System.currentTimeMillis();
 
-        while((System.currentTimeMillis()-depart < 2000)) {
-            audioRecord.read(signal,0,taille);
+        int compteur = 0;
+        while((compteur < taille)) {
+            compteur += audioRecord.read(signal,0,taille);
         }
 
         audioRecord.stop();

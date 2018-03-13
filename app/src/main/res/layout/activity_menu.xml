@@ -25,15 +25,9 @@
         android:text="Dictée de notes" />
 
     <Button
-        android:id="@+id/buttonLecture2"
+        android:id="@+id/buttonAccordeur"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Lecture de notes 2" />
-
-    <Button
-        android:id="@+id/buttonTest"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Test enregistrement" />
+        android:text="Accordeur" />
 
 </LinearLayout>

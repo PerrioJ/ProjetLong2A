@@ -21,14 +21,21 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LectureDeNote"
+            android:name=".LectureDeNote_Button"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".DicteeDeNote"
+            android:name=".DicteeDeNote_Button"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".TestRecord"
+            android:name=".Accordeur"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".DicteeVocale"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LectureDeNote_Note"
+            android:screenOrientation="landscape" />
+        <activity android:name=".LectureDeNote_Speech"></activity>
     </application>
 
 </manifest>

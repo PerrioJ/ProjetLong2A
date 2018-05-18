@@ -3,6 +3,9 @@ package perriobarreteau.apprentissagemusique;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+
 import java.util.Arrays;
 
 public class Note {
@@ -21,26 +24,27 @@ public class Note {
 
     }
 
-    public static short[] enregistrement() {
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public static float[] enregistrement() {
 
         // Paramètres d'enregistrement
         int source = MediaRecorder.AudioSource.DEFAULT;
         int sampleRate = 8000;
         int channel = AudioFormat.CHANNEL_IN_MONO;
-        int encoding = AudioFormat.ENCODING_PCM_16BIT;
+        int encoding = AudioFormat.ENCODING_PCM_FLOAT;
         int taille = 8192;
 
         AudioRecord audioRecord = new AudioRecord(source,sampleRate,channel,encoding,2*taille);
 
         audioRecord.startRecording();
 
-        short[] signal = new short[taille];
+        float[] signal = new float[taille];
 
         long depart = System.currentTimeMillis();
 
         int compteur = 0;
         while((compteur < taille)) {
-            compteur += audioRecord.read(signal,0,taille);
+            compteur += audioRecord.read(signal,0,taille,AudioRecord.READ_BLOCKING);
         }
 
         audioRecord.stop();
@@ -49,7 +53,7 @@ public class Note {
         return(signal);
     }
 
-    public static int reconnaissanceDeNote(short[] signal, int Fe) {
+    public static int reconnaissanceDeNote(float[] signal, int Fe) {
 
         int Ny = signal.length;
 

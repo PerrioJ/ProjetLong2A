@@ -13,30 +13,54 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        Button buttonLecture = (Button) findViewById(R.id.buttonLecture);
-        Button buttonDictee = (Button) findViewById(R.id.buttonDictee);
+        Button buttonLecture_Button = (Button) findViewById(R.id.buttonLecture_Button);
+        Button buttonLecture_Note = (Button) findViewById(R.id.buttonLecture_Note);
+        Button buttonLecture_Speech = (Button) findViewById(R.id.buttonLecture_Speech);
+        Button buttonDictee_Button = (Button) findViewById(R.id.buttonDictee_Button);
         Button buttonAccorder = (Button) findViewById(R.id.buttonAccordeur);
+        Button buttonVocal = (Button) findViewById(R.id.buttonVocal);
 
-        buttonLecture.setOnClickListener(new View.OnClickListener() {
+        buttonLecture_Button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent passageLecture = new Intent(MenuActivity.this, LectureDeNote.class);
-                startActivity(passageLecture);
+                Intent intent = new Intent(MenuActivity.this, LectureDeNote_Button.class);
+                startActivity(intent);
             }
         });
 
-        buttonDictee.setOnClickListener(new View.OnClickListener() {
+        buttonLecture_Note.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent passageDictee = new Intent(MenuActivity.this, DicteeDeNote.class);
-                startActivity(passageDictee);
+                Intent intent = new Intent(MenuActivity.this, LectureDeNote_Note.class);
+                startActivity(intent);
             }
         });
 
+        buttonLecture_Speech.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(MenuActivity.this, LectureDeNote_Speech.class);
+                startActivity(intent);
+            }
+        });
+
+        buttonDictee_Button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(MenuActivity.this, DicteeDeNote_Button.class);
+                startActivity(intent);
+            }
+        });
 
         buttonAccorder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent passageTest = new Intent(MenuActivity.this, TestRecord.class);
-                startActivity(passageTest);
+                Intent intent = new Intent(MenuActivity.this, Accordeur.class);
+                startActivity(intent);
+            }
+        });
+
+        buttonVocal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MenuActivity.this, DicteeVocale.class);
+                startActivity(intent);
             }
         });
 

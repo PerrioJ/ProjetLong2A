@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="perriobarreteau.apprentissagemusique.TestRecord">
+    tools:context="perriobarreteau.apprentissagemusique.Accordeur">
 
     <Button
         android:id="@+id/buttonRecord"

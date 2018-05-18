@@ -12,22 +12,52 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="perriobarreteau.apprentissagemusique.MenuActivity">
 
-    <Button
-        android:id="@+id/buttonLecture"
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Lecture de notes" />
+        android:text="Modes de jeu" />
 
     <Button
-        android:id="@+id/buttonDictee"
+        android:id="@+id/buttonLecture_Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Dictée de notes" />
+        android:text="Lecture de notes (bouton)" />
+
+    <Button
+        android:id="@+id/buttonLecture_Note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lecture de notes (note)" />
+
+    <Button
+        android:id="@+id/buttonLecture_Speech"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lecture de notes (parole)" />
+
+    <Button
+        android:id="@+id/buttonDictee_Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dictée de notes (bouton)" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Outils" />
 
     <Button
         android:id="@+id/buttonAccordeur"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Accordeur" />
+
+    <Button
+        android:id="@+id/buttonVocal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lecture de Notes Vocale" />
 
 </LinearLayout>

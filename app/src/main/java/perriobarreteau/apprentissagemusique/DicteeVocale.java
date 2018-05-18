@@ -1,17 +1,18 @@
 package perriobarreteau.apprentissagemusique;
 
-import android.media.AudioFormat;
-import android.media.AudioRecord;
-import android.media.MediaPlayer;
-import android.media.MediaRecorder;
-import android.os.AsyncTask;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Environment;
-import android.provider.MediaStore;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
 
 import org.w3c.dom.Text;
 
@@ -19,11 +20,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 import java.util.Arrays;
 
-public class TestRecord extends AppCompatActivity {
+public class DicteeVocale extends AppCompatActivity {
 
     Note Do = new Note(0, "Do", R.drawable.ic_note_do, R.raw.aaa);
     Note Dod = new Note(1, "Do#", R.drawable.ic_note_do, R.raw.aaa);
@@ -42,33 +41,35 @@ public class TestRecord extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test_record);
+        setContentView(R.layout.activity_dictee_vocale);
 
-        int resultat = -1;
+        final TextView textViewResultat = (TextView) findViewById(R.id.textViewResultat);
 
-        Button buttonRecord = (Button) findViewById(R.id.buttonRecord);
-        buttonRecord.setOnClickListener(new View.OnClickListener() {
-
+        final Button buttonEnregistrement = (Button) findViewById(R.id.buttonEnregistrement);
+        buttonEnregistrement.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View view) {
 
-                short[] signal = Note.enregistrement();
+                System.out.println("Start");
+                float[] signal = Speech.enregistrement();
+                System.out.println("Stop");
+                float[][] mfcc = Speech.MFCC(signal, 8000);
 
-                int resultat = Note.reconnaissanceDeNote(signal, 8000);
-                System.out.println(resultat);
+                System.out.println(Arrays.deepToString(mfcc));
 
-                TextView textViewNote = (TextView) findViewById(R.id.textViewNote);
-                if (resultat == -1) {
-                    textViewNote.setText("...");
-                }
-                else {
-                    textViewNote.setText(notes[resultat].nom);
-                }
+                Gson gson = new Gson();
+                String MFCC = gson.toJson(mfcc);
+
+/*                SharedPreferences SP = getApplicationContext().getSharedPreferences("Si",Context.MODE_PRIVATE);
+                SP.edit().putString(String.valueOf(nb[0]),MFCC).apply();*/
+
+                int resultat = Speech.Resultat(mfcc,getApplicationContext());
+
+                textViewResultat.setText(notes[resultat].nom);
 
             }
         });
 
-
     }
-
 }

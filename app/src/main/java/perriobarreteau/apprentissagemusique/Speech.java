@@ -1,20 +1,22 @@
 package perriobarreteau.apprentissagemusique;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.media.AudioFormat;
+import android.media.AudioManager;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
-import android.util.Log;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.w3c.dom.Text;
+
 import java.util.Arrays;
-import java.util.Map;
 
 import static java.lang.Math.PI;
 import static java.lang.Math.cos;
@@ -29,7 +31,7 @@ public class Speech {
     public static float[] enregistrement() {
 
         // Paramètres d'enregistrement
-        int source = MediaRecorder.AudioSource.DEFAULT;
+        int source = MediaRecorder.AudioSource.VOICE_RECOGNITION;
         int sampleRate = 8000;
         int channel = AudioFormat.CHANNEL_IN_MONO;
         int encoding = AudioFormat.ENCODING_PCM_FLOAT;
@@ -42,6 +44,10 @@ public class Speech {
         float[] signal = new float[taille];
 
         long depart = System.currentTimeMillis();
+
+        if (audioRecord.getState() != AudioRecord.STATE_INITIALIZED) {
+            System.out.println("ERROR");
+        }
 
         int compteur = 0;
         while((compteur < taille)) {
@@ -75,7 +81,7 @@ public class Speech {
         float[] signalB = new float[length_signal];
         signalB[0] = signal[0];
         for (int k = 1; k<length_signal; k++) {
-            signalB[k] = (signal[k]-alpha*signal[k-1]);
+            signalB[k] = (float) ((signal[k]-alpha*signal[k-1]));
         }
 
         float[][] mfcc = new float[(length_signal - length_frame) / step][nb_coeffs];
@@ -108,10 +114,12 @@ public class Speech {
                 }
             }
 
+            System.out.println(Arrays.toString(energies));
+
             // Log
             float[] logspecter = new float[nb_filters];
             for (int k = 0; k<nb_filters; k++) {
-                logspecter[k] = (float) log10(energies[k]+0.000001);
+                logspecter[k] = (float) log10(energies[k]);
             }
 
             // iDCT
@@ -304,7 +312,7 @@ public class Speech {
         }
 
         // Détermination du résultat
-        int resultat = 0;
+        int resultat = -1;
         for (int n = 0; n<12; n++) {
             if (resultats[n]> resultat) {
                 resultat = n;

@@ -5,30 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="perriobarreteau.apprentissagemusique.LectureDeNote_Speech">
+    tools:context="perriobarreteau.apprentissagemusique.DicteeDeNote_Speech">
 
-    <TextView
-        android:id="@+id/textViewScore"
+    <ImageButton
+        android:id="@+id/imageButtonNote"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="233dp"
         android:layout_weight="1"
-        android:text="Score : 0/0"
-        android:textAlignment="textEnd"
-        android:textStyle="bold" />
-
-    <ImageView
-        android:id="@+id/imageViewNote"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        app:srcCompat="@drawable/ic_note_do" />
+        app:srcCompat="@android:drawable/ic_media_play" />
 
     <Button
         android:id="@+id/buttonRecord"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="150dp"
         android:layout_weight="1"
         android:onClick="onClick"
         android:text="Appuyez et dites la note" />
+
+    <TextView
+        android:id="@+id/textViewReponse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textSize="30sp" />
 
 </LinearLayout>

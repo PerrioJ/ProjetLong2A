@@ -1,6 +1,7 @@
 package perriobarreteau.apprentissagemusique;
 
 import android.media.AudioFormat;
+import android.media.AudioManager;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
 import android.os.Build;

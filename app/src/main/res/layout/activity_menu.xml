@@ -42,6 +42,12 @@
         android:layout_height="wrap_content"
         android:text="Dictée de notes (bouton)" />
 
+    <Button
+        android:id="@+id/buttonDictee_Speech"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dictée de notes (parole)" />
+
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"

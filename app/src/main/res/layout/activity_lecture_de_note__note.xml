@@ -7,10 +7,19 @@
     android:orientation="vertical"
     tools:context="perriobarreteau.apprentissagemusique.LectureDeNote_Note">
 
+    <TextView
+        android:id="@+id/textViewScore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.2"
+        android:text="Score : 0/0"
+        android:textAlignment="textEnd"
+        android:textStyle="bold" />
+
     <ImageView
         android:id="@+id/imageViewNote"
         android:layout_width="match_parent"
-        android:layout_height="73dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         app:srcCompat="@drawable/ic_note_do" />
 

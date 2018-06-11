@@ -3,7 +3,6 @@
     package="perriobarreteau.apprentissagemusique">
 
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -21,11 +20,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LectureDeNote_Button"
-            android:screenOrientation="landscape" />
+            android:name=".LectureDeNote_Button" />
         <activity
-            android:name=".DicteeDeNote_Button"
-            android:screenOrientation="landscape" />
+            android:name=".DicteeDeNote_Button" />
         <activity
             android:name=".Accordeur"
             android:screenOrientation="portrait" />
@@ -33,9 +30,9 @@
             android:name=".DicteeVocale"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".LectureDeNote_Note"
-            android:screenOrientation="landscape" />
-        <activity android:name=".LectureDeNote_Speech"></activity>
+            android:name=".LectureDeNote_Note" />
+        <activity android:name=".LectureDeNote_Speech" />
+        <activity android:name=".DicteeDeNote_Speech"></activity>
     </application>
 
 </manifest>

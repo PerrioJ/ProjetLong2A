@@ -1,6 +1,11 @@
 package perriobarreteau.apprentissagemusique;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +22,7 @@ public class MenuActivity extends AppCompatActivity {
         Button buttonLecture_Note = (Button) findViewById(R.id.buttonLecture_Note);
         Button buttonLecture_Speech = (Button) findViewById(R.id.buttonLecture_Speech);
         Button buttonDictee_Button = (Button) findViewById(R.id.buttonDictee_Button);
+        Button buttonDictee_Speech = (Button) findViewById(R.id.buttonDictee_Speech);
         Button buttonAccorder = (Button) findViewById(R.id.buttonAccordeur);
         Button buttonVocal = (Button) findViewById(R.id.buttonVocal);
 
@@ -44,6 +50,13 @@ public class MenuActivity extends AppCompatActivity {
         buttonDictee_Button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent intent = new Intent(MenuActivity.this, DicteeDeNote_Button.class);
+                startActivity(intent);
+            }
+        });
+
+        buttonDictee_Speech.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(MenuActivity.this, DicteeDeNote_Speech.class);
                 startActivity(intent);
             }
         });

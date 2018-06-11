@@ -13,6 +13,15 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="perriobarreteau.apprentissagemusique.DicteeDeNote_Button">
 
+    <TextView
+        android:id="@+id/textViewScore"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="Score : 0/0"
+        android:textAlignment="textEnd"
+        android:textStyle="bold" />
+
     <ImageButton
         android:id="@+id/imageButtonNote"
         android:layout_width="match_parent"
@@ -117,7 +126,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="SI" />
+            android:text="Si" />
     </LinearLayout>
 
 </LinearLayout>

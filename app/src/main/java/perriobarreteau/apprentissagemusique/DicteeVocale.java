@@ -2,7 +2,12 @@ package perriobarreteau.apprentissagemusique;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Color;
+import android.media.AudioFormat;
+import android.media.AudioRecord;
+import android.media.MediaRecorder;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
 import android.support.annotation.RequiresApi;
@@ -10,9 +15,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.w3c.dom.Text;
 
@@ -22,7 +29,17 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 
+import static java.lang.Math.PI;
+import static java.lang.Math.cos;
+import static java.lang.Math.log10;
+import static java.lang.Math.min;
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
+
 public class DicteeVocale extends AppCompatActivity {
+
+    private TextView textViewResultat;
+    private Button buttonEnregistrement;
 
     Note Do = new Note(0, "Do", R.drawable.ic_note_do, R.raw.aaa);
     Note Dod = new Note(1, "Do#", R.drawable.ic_note_do, R.raw.aaa);
@@ -43,33 +60,56 @@ public class DicteeVocale extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dictee_vocale);
 
-        final TextView textViewResultat = (TextView) findViewById(R.id.textViewResultat);
+        textViewResultat = (TextView) findViewById(R.id.textViewResultat);
+        buttonEnregistrement = (Button) findViewById(R.id.buttonEnregistrement);
 
-        final Button buttonEnregistrement = (Button) findViewById(R.id.buttonEnregistrement);
         buttonEnregistrement.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View view) {
 
-                System.out.println("Start");
-                float[] signal = Speech.enregistrement();
-                System.out.println("Stop");
-                float[][] mfcc = Speech.MFCC(signal, 8000);
-
-                System.out.println(Arrays.deepToString(mfcc));
-
-                Gson gson = new Gson();
-                String MFCC = gson.toJson(mfcc);
-
-/*                SharedPreferences SP = getApplicationContext().getSharedPreferences("Si",Context.MODE_PRIVATE);
-                SP.edit().putString(String.valueOf(nb[0]),MFCC).apply();*/
-
-                int resultat = Speech.Resultat(mfcc,getApplicationContext());
-
-                textViewResultat.setText(notes[resultat].nom);
+                Traitement traitement = new Traitement();
+                traitement.execute(getApplicationContext());
 
             }
         });
 
     }
+
+    public class Traitement extends AsyncTask<Context, Void, Integer> {
+
+        @RequiresApi(api = Build.VERSION_CODES.M)
+        @Override
+        protected Integer doInBackground(Context... contexts) {
+
+            System.out.println("Start");
+            float[] signal = perriobarreteau.apprentissagemusique.Speech.enregistrement();
+            System.out.println("Stop");
+
+            float[][] mfcc = perriobarreteau.apprentissagemusique.Speech.MFCC(signal,8000);
+
+            int resultat = perriobarreteau.apprentissagemusique.Speech.Resultat(mfcc, contexts[0]);
+            System.out.println(resultat);
+
+            return(resultat);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            buttonEnregistrement.setEnabled(false);
+
+        }
+
+        @Override
+        protected void onPostExecute(Integer integer) {
+            super.onPostExecute(integer);
+
+            textViewResultat.setText(notes[integer].nom);
+            buttonEnregistrement.setEnabled(true);
+
+        }
+    }
+
 }

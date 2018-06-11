@@ -1,5 +1,6 @@
 package perriobarreteau.apprentissagemusique;
 
+import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class Accordeur extends AppCompatActivity {
+
+    Button buttonRecord;
+    TextView textViewNote;
 
     Note Do = new Note(0, "Do", R.drawable.ic_note_do, R.raw.aaa);
     Note Dod = new Note(1, "Do#", R.drawable.ic_note_do, R.raw.aaa);
@@ -31,30 +35,54 @@ public class Accordeur extends AppCompatActivity {
 
         int resultat = -1;
 
-        Button buttonRecord = (Button) findViewById(R.id.buttonRecord);
+        textViewNote = (TextView) findViewById(R.id.textViewNote);
+        buttonRecord = (Button) findViewById(R.id.buttonRecord);
+
         buttonRecord.setOnClickListener(new View.OnClickListener() {
 
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View view) {
 
-                float[] signal = Note.enregistrement();
-
-                int resultat = Note.reconnaissanceDeNote(signal, 8000);
-                System.out.println(resultat);
-
-                TextView textViewNote = (TextView) findViewById(R.id.textViewNote);
-                if (resultat == -1) {
-                    textViewNote.setText("...");
-                }
-                else {
-                    textViewNote.setText(notes[resultat].nom);
-                }
+                Traitement traitement = new Traitement();
+                traitement.execute();
 
             }
         });
 
 
+    }
+
+    private class Traitement extends AsyncTask<Void, Void, Integer> {
+
+
+        @RequiresApi(api = Build.VERSION_CODES.M)
+        @Override
+        protected Integer doInBackground(Void... voids) {
+
+            float[] signal = Note.enregistrement();
+
+            int resultat = Note.reconnaissanceDeNote(signal, 8000);
+
+            return(resultat);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            buttonRecord.setEnabled(false);
+
+        }
+
+        @Override
+        protected void onPostExecute(Integer integer) {
+            super.onPostExecute(integer);
+
+            textViewNote.setText("Note : "+notes[integer].nom);
+            buttonRecord.setEnabled(true);
+
+        }
     }
 
 }

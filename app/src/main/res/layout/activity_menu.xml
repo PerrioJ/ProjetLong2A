@@ -64,6 +64,6 @@
         android:id="@+id/buttonVocal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Lecture de Notes Vocale" />
+        android:text="Test Reconnaissance de mot" />
 
 </LinearLayout>

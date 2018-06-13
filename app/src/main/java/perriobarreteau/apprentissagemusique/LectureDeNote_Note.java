@@ -59,7 +59,6 @@ public class LectureDeNote_Note extends AppCompatActivity implements View.OnClic
 
         buttonRecord = (Button) findViewById(R.id.buttonRecord);
         buttonRecord.setOnClickListener(this);
-
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -118,7 +117,7 @@ public class LectureDeNote_Note extends AppCompatActivity implements View.OnClic
             // Cas mauvaise réponse
             else{
                 buttonRecord.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.MULTIPLY);
-                Toast.makeText(getApplicationContext(), "C'était un : "+notes[idQuestion].nom, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "C'était un : "+notesSansDieses[idQuestion].nom, Toast.LENGTH_LONG).show();
             }
 
             nbQuestions++;

@@ -276,6 +276,7 @@ public class Speech {
                 String json = cursor.getString(cursor.getColumnIndex(DBManager.KEY_mfcc));
                 mfccRef = gson.fromJson(json,new TypeToken<float[][]>() {}.getType());
                 distances[n] = DTW(mfcc,mfccRef);
+                System.out.println(classes[n]+" : "+distances[n]);
                 n++;
             }
             while (cursor.moveToNext());
@@ -284,7 +285,7 @@ public class Speech {
 
         db.close();
 
-        int K = 5;
+        int K = 3;
         int resultat = KNN(K, classes, distances);
 
         return (resultat);

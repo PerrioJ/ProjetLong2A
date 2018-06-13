@@ -54,6 +54,7 @@ public class DicteeVocale extends AppCompatActivity {
     Note Lad = new Note(10, "La#", R.drawable.ic_note_la, R.raw.la);
     Note Si = new Note(11, "Si", R.drawable.ic_note_si, R.raw.si);
     Note[] notes = {Do, Dod, Re, Red, Mi, Fa, Fad, Sol, Sold, La, Lad, Si};
+    int n = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +87,14 @@ public class DicteeVocale extends AppCompatActivity {
             float[] signal = perriobarreteau.apprentissagemusique.Speech.enregistrement();
             System.out.println("Stop");
 
-            float[][] mfcc = perriobarreteau.apprentissagemusique.Speech.MFCC(signal,8000);
+            float[][] mfcc = perriobarreteau.apprentissagemusique.Speech.MFCC(signal, 8000);
+
+            Gson gson = new Gson();
+            SharedPreferences SP = getSharedPreferences("Do2",0);
+            SharedPreferences.Editor editor = SP.edit();
+            editor.putString(String.valueOf(n),gson.toJson(mfcc));
+            editor.commit();
+            n++;
 
             int resultat = perriobarreteau.apprentissagemusique.Speech.Resultat(mfcc, contexts[0]);
             System.out.println(resultat);
@@ -106,7 +114,7 @@ public class DicteeVocale extends AppCompatActivity {
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
 
-            textViewResultat.setText(notes[integer].nom);
+            textViewResultat.setText("Mot : "+notes[integer].nom);
             buttonEnregistrement.setEnabled(true);
 
         }

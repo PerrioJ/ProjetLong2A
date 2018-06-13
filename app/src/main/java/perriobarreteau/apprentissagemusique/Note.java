@@ -35,19 +35,21 @@ public class Note {
         int encoding = AudioFormat.ENCODING_PCM_FLOAT;
         int taille = 8192;
 
+        // Création de l'objet
         AudioRecord audioRecord = new AudioRecord(source,sampleRate,channel,encoding,2*taille);
 
+        // Enregistrement
+            // début
         audioRecord.startRecording();
-
+            // création du buffer
         float[] signal = new float[taille];
-
         long depart = System.currentTimeMillis();
-
         int compteur = 0;
+            // attente de remplissage du buffer
         while((compteur < taille)) {
             compteur += audioRecord.read(signal,0,taille,AudioRecord.READ_BLOCKING);
         }
-
+            // fin
         audioRecord.stop();
         audioRecord.release();
 
@@ -69,6 +71,10 @@ public class Note {
         float Fn = (float) (F/440.0);
         int MIDI = (int) (69.0+12*Math.log(F/440.0)/Math.log(2.0) + 0.5);
         int numero = MIDI%12;
+
+        if(numero<0) {
+            numero+=12;
+        }
 
         return(numero);
 

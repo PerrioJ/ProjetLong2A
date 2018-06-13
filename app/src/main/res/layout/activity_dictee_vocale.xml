@@ -19,7 +19,7 @@
         android:id="@+id/textViewResultat"
         android:layout_width="match_parent"
         android:layout_height="118dp"
-        android:text="note"
+        android:text="Mot : "
         android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textSize="50sp" />
